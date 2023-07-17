@@ -1,6 +1,6 @@
 # node.js-hw-1
 
-Screenshots with actions
+Screenshots with actions:
 
 list https://monosnap.com/file/LVk283nUWkBM8Lrc7BG9XlarCwvvQX
 
