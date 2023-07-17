@@ -1,7 +1,10 @@
-// import { listContacts } from "./contacts.js";
+const {
+  listContacts,
+  getContactById,
+  addContact,
+  removeContact,
+} = require("./contacts.js");
 
-const { listContacts } = require("./contacts.js");
-const argv = require("yargs").argv;
 const { Command } = require("commander");
 
 const program = new Command();
@@ -15,19 +18,23 @@ program
 
 program.parse(process.argv);
 
+const argv = program.opts();
+
 const invokeAction = async ({ action, id, name, email, phone }) => {
   switch (action) {
     case "list":
-      const contactsList = await contacts.listContacts();
-      console.log(contactsList);
+      const contactsList = await listContacts();
+      console.table(contactsList);
       break;
 
     case "get":
-      // ... id
+      const contact = await getContactById(id);
+      console.log(contact);
       break;
 
     case "add":
-      // ... name email phone
+      const newContact = await addContact({ name, email, phone });
+      console.log(newContact);
       break;
 
     case "remove":
@@ -35,7 +42,7 @@ const invokeAction = async ({ action, id, name, email, phone }) => {
       break;
 
     default:
-      console.warn("\x1B[31m Unknown action type!");
+      console.log("Unknown action type!");
   }
 };
 
